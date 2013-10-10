@@ -235,6 +235,10 @@ fi
 # org.apache.catalina.security.SecurityListener
 #JAVA_OPTS="$JAVA_OPTS -Dorg.apache.catalina.security.SecurityListener.UMASK=`umask`"
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+JAVA_OPTS="$JAVA_OPTS -javaagent:$DIR/../newrelic/newrelic.jar"
+echo $JAVA_OPTS
+
 # ----- Execute The Requested Command -----------------------------------------
 
 # Bugzilla 37848: only output this if we have a TTY
