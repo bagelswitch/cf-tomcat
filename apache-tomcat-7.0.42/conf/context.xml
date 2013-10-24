@@ -17,6 +17,10 @@
 -->
 <!-- The contents of this file will be loaded for each web application -->
 <Context>
+    <context-param>
+        <param-name>com.newrelic.agent.APPLICATION_NAME</param-name>
+        <param-value>${com.newrelic.agent.APPLICATION_NAME}</param-value>
+    </context-param>
 
     <!-- Default set of monitored resources -->
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
