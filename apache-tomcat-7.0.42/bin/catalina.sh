@@ -236,7 +236,7 @@ fi
 #JAVA_OPTS="$JAVA_OPTS -Dorg.apache.catalina.security.SecurityListener.UMASK=`umask`"
 
 JAVA_OPTS="$JAVA_OPTS -Dcom.newrelic.agent.APPLICATION_NAME=$NEW_RELIC_APP_NAME -javaagent:/home/vcap/app/.tomcat/newrelic/newrelic.jar"
-echo $JAVA_OPTS
+echo "Java startup options: $CATALINA_OPTS $JAVA_OPTS"
 
 # ----- Execute The Requested Command -----------------------------------------
 
