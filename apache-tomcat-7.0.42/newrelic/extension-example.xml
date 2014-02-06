@@ -4,7 +4,7 @@
 
 <extension xmlns="https://newrelic.com/docs/java/xsd/v1.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="newrelic-extension extension.xsd " name="customExtensions"
+	xsi:schemaLocation="newrelic-extension extension.xsd " name="extension-example"
 	version="1.0" enabled="true">
 	<instrumentation>
 
@@ -12,7 +12,7 @@
 		<pointcut transactionStartPoint="true"
 			excludeFromTransactionTrace="false" ignoreTransaction="false">
 			<className>com.sample.SampleArrayList</className>
-			<!-- Implements the method clear() -->
+			<!-- Instruments the method clear() -->
 			<method>
 				<name>clear</name>
 				<parameters />
@@ -21,7 +21,7 @@
 					match all methods named clear on the class regardless of the input parameters. 
 					In other words it would match clear(int) clear(long) clear(int, long). -->
 			</method>
-			<!-- Implements the method Object get(int index) -->
+			<!-- Instruments the method Object get(int index) -->
 			<method>
 				<name>get</name>
 				<parameters>
@@ -30,7 +30,7 @@
 					<type>int</type>
 				</parameters>
 			</method>
-			<!-- Implements the method boolean addAll(int index, Collection c) -->
+			<!-- Instruments the method boolean addAll(int index, Collection c) -->
 			<method>
 				<name>addAll</name>
 				<parameters>
@@ -44,14 +44,14 @@
 		<!-- This point cut instruments some of the methods in the class com.sample.SampleString. -->
 		<pointcut transactionStartPoint="true">
 			<className>com.sample.SampleString</className>
-			<!-- Implements the method boolean startsWith(String prefix) -->
+			<!-- Instruments the method boolean startsWith(String prefix) -->
 			<method>
 				<name>startsWith</name>
 				<parameters>
 					<type>java.lang.String</type>
 				</parameters>
 			</method>
-			<!-- Implements the method String valueOf(char[] data, int offset, int 
+			<!-- Instruments the method String valueOf(char[] data, int offset, int
 				count) -->
 			<method>
 				<name>valueOf</name>
@@ -63,6 +63,34 @@
 				</parameters>
 			</method>
 		</pointcut>
+
+
+		<!-- This point cut instruments all of the methods in the class com.sample.SampleString
+			that are named startsWith, ignoring the input parameters and return type.  -->
+		<pointcut transactionStartPoint="true">
+			<className>com.sample.SampleString</className>
+			<method>
+				<name>startsWith</name>
+			</method>
+		</pointcut>
+
+
+		<!-- This point cut instruments the method startsWith in the class com.sample.SampleString.
+			By adding the <nameTransaction/> element, the class and method specified in this pointcut
+			will be used to name transactions which hit this pointcut. Without this, the default
+			convention is to name transctions with the class and method from the transaction start point. -->
+		<pointcut transactionStartPoint="false">
+			<nameTransaction/>
+			<className>com.sample.SampleString</className>
+			<!-- Instruments the method boolean startsWith(String prefix) -->
+			<method>
+				<name>startsWith</name>
+				<parameters>
+					<type>java.lang.String</type>
+				</parameters>
+			</method>
+		</pointcut>
+
 
 	</instrumentation>
 </extension>
