@@ -237,6 +237,7 @@ fi
 
 case "$NEW_RELIC_ENABLED" in
  TRUE) JAVA_OPTS="$JAVA_OPTS -Dcom.newrelic.agent.APPLICATION_NAME=$NEW_RELIC_APP_NAME -javaagent:/home/vcap/app/.tomcat/newrelic/newrelic.jar" ;;
+ true) JAVA_OPTS="$JAVA_OPTS -Dcom.newrelic.agent.APPLICATION_NAME=$NEW_RELIC_APP_NAME -javaagent:/home/vcap/app/.tomcat/newrelic/newrelic.jar" ;;
     *) JAVA_OPTS="$JAVA_OPTS -Dcom.newrelic.agent.APPLICATION_NAME=$NEW_RELIC_APP_NAME" ;;
 esac
 
